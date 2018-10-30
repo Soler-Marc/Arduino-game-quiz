@@ -1,92 +1,91 @@
-int resposta[7] = {0, 0,1,1,0,0,1};
+    int resposta[7] = {0, 0,1,1,0,0,1};
+    String pregunta[7] = {"LEDs usually tolerate up to 20mA", "Digital binary signals have two possible states: HIGH and LOW",
 
-String pregunta[7] = {"LEDs usually tolerate up to 20mA", "Digital binary signals have two possible states: HIGH and LOW",
+    "pinMode is declarated at loop()","A photoresistor is a type of resistor whose resistance increases when the intensity of light increases ",
 
-"pinMode is declarated at loop()","A photoresistor is a type of resistor whose resistance increases when the intensity of light increases ",
+    "A potentiometer is a simple knob that provides a variable resistance","Motion range of servos are from 0º to 180º", "Arduino UNO outputs operate at 4V"};
 
-"A potentiometer is a simple knob that provides a variable resistance","Motion range of servos are from 0º to 180º", "Arduino UNO outputs operate at 4V"};
-
-//we create a string with some questions for our quiz
-
+     //we create a string with some questions for our quiz
 
 
-// digital pin 2 has a pushbutton attached to it. Give it a name:
 
-int pushButtonG = 4;
+    // digital pin 2 has a pushbutton attached to it. Give it a name:
 
-int pushButtonR = 2;//we declare the pins of the pushbuttons
+    int pushButtonG = 4;
 
-int ledG = 10;
+    int pushButtonR = 2;//we declare the pins of the pushbuttons
 
-int ledR = 8;//we declare the pins of the LEDs
+    int ledG = 10;
 
-int rnd = 0;
+    int ledR = 8;//we declare the pins of the LEDs
 
-int resultat;
+    int rnd = 0;
 
-int contadorpregunta = 1;
+    int resultat;
 
-int contador = 0;//number of answers correct 
+    int contadorpregunta = 1;
 
-// the setup routine runs once when you press reset:
-void setup() {
+    int contador = 0;//number of answers correct 
 
-  // initialize serial communication at 9600 bits per second:
+    // the setup routine runs once when you press reset:
+    void setup() {
+
+    // initialize serial communication at 9600 bits per second:
   
-  Serial.begin(9600);
+    Serial.begin(9600);
   
-  // make the pushbutton's pin an input:
+     // make the pushbutton's pin an input:
   
-  pinMode(pushButtonG, INPUT);
+     pinMode(pushButtonG, INPUT);
   
-  pinMode(pushButtonR, INPUT);//declare pushbuttons as an input
+    pinMode(pushButtonR, INPUT);//declare pushbuttons as an input
   
-  pinMode(ledG, OUTPUT);
+    pinMode(ledG, OUTPUT);
+    
+    pinMode(ledR, OUTPUT);//declare pushbuttons as an output
   
-  pinMode(ledR, OUTPUT);//declare pushbuttons as an output
-  
-}
+    }
 
-// the loop routine runs over and over again forever:
+    // the loop routine runs over and over again forever:
 
-void loop() {
+    void loop() {
 
-  // read the input pin:
+    // read the input pin:
 
 
-  Serial.print("QÜESTION ");Serial.print(contadorpregunta); Serial.println(":");
+    Serial.print("QÜESTION ");Serial.print(contadorpregunta); Serial.println(":");
   
-  Serial.println(pregunta[rnd]);//start with the question + witch number of question is it.
+    Serial.println(pregunta[rnd]);//start with the question + witch number of question is it.
   
-  int buttonStateG = HIGH;
+    int buttonStateG = HIGH;
   
-  int buttonStateR = HIGH; //we check our pushbutton with DigitalRead and then we declare the initial state.
+    int buttonStateR = HIGH; //we check our pushbutton with DigitalRead and then we declare the initial state.
 
-  while (buttonStateG == HIGH && buttonStateR == HIGH) {
+    while (buttonStateG == HIGH && buttonStateR == HIGH) {
   
     buttonStateG = digitalRead(pushButtonG);
     
     buttonStateR = digitalRead(pushButtonR);//if our pushbuttons are high=read our funtion.
     
-  }
+   }
 
-  int resp = -1;
+    int resp = -1;
   
-  if (buttonStateG == LOW) {
+    if (buttonStateG == LOW) {
   
     resp = 0;
-  } else {
+    } else {
   
     resp = 1; //if we push TRUE button answer is correct else incorrect.
-  }
+   }
 
-  while (buttonStateG == LOW || buttonStateR == LOW) {
+    while (buttonStateG == LOW || buttonStateR == LOW) {
   
     buttonStateG = digitalRead(pushButtonG);
     buttonStateR = digitalRead(pushButtonR); //if our pushbuttons are low=read our funtion.
-  }
+    }
 
-  if (resp == resposta[rnd]) {
+    if (resp == resposta[rnd]) {
   
     Serial.println("CORRECT!");
         digitalWrite(ledR, HIGH);
@@ -95,20 +94,19 @@ void loop() {
     contador++;
 
 
-  } else {
+     } else {
   
     Serial.println("INCORRECT!");
     digitalWrite(ledG, HIGH);
     delay (500);
     digitalWrite(ledG, LOW);//if answers is incorrect red light
 
-  }
-  rnd = rnd + 1; //next question
+    }
+    rnd = rnd + 1; //next question
   
-  contadorpregunta = contadorpregunta +1;//next numer of question
+    contadorpregunta = contadorpregunta +1;//next numer of question
   
-
-  if (rnd >= 7) {
+    if (rnd >= 7) {
   
     Serial.println("END OF THE GAME!");
     Serial.print("Total points: ");//final text
@@ -119,6 +117,6 @@ void loop() {
     contadorpregunta = 1;//restart
    
 
-  }
+      }
 
-}
+    }
