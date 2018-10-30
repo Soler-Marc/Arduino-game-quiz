@@ -1,5 +1,3 @@
-*/
-
 int resposta[7] = {0, 0,1,1,0,0,1};
 String pregunta[7] = {"LEDs usually tolerate up to 20mA", "Digital binary signals have two possible states: HIGH and LOW",
 "pinMode is declarated at loop()","A photoresistor is a type of resistor whose resistance increases when the intensity of light increases ",
